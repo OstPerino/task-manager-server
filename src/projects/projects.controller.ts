@@ -22,4 +22,7 @@ export class ProjectsController {
   createNewProject(@Body() createProjectDto: CreateProjectDto) {
     return this.projectsService.create(createProjectDto);
   }
+  //   TODO: Сделать добавление новых пользователей на проект
+  //   TODO: Сделать удаление пользователей с проекта
+  //   TODO: Сделать права пользователей на проекте
 }
