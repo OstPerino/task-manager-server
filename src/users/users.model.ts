@@ -1,5 +1,13 @@
-import { Table, Model, Column, DataType } from 'sequelize-typescript';
+import {
+  Table,
+  Model,
+  Column,
+  DataType,
+  BelongsToMany,
+} from 'sequelize-typescript';
 import { ApiProperty } from '@nestjs/swagger';
+import { Project } from '../projects/projects.model';
+import { UsersProjects } from '../projects/user-projects.model';
 
 interface UserCreationAttrs {
   email: string;
@@ -53,4 +61,7 @@ export class User extends Model<User, UserCreationAttrs> {
     allowNull: false,
   })
   password: string;
+
+  @BelongsToMany(() => Project, () => UsersProjects)
+  users: User[];
 }
