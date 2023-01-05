@@ -6,4 +6,7 @@ export class CreateProjectDto {
 
   @ApiProperty({ example: 'Project Description', description: 'Описание' })
   readonly description: string;
+
+  @ApiProperty({ example: 'Email', description: 'email@gmail.com' })
+  readonly email: string;
 }
