@@ -25,4 +25,7 @@ export class UsersProjects extends Model<UsersProjects> {
   @ForeignKey(() => Project)
   @Column({ type: DataType.INTEGER })
   projectId: number;
+
+  @Column({ type: DataType.STRING })
+  role: string;
 }
