@@ -10,7 +10,7 @@ async function bootstrap() {
     .setTitle('Task Manager API')
     .setDescription('API for task manager which made for diplom to SibFU')
     .setVersion('1.0')
-    .addTag('nestjs')
+    .addTag('Task Manager REST API')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
