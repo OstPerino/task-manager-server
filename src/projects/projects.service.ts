@@ -13,7 +13,8 @@ export class ProjectsService {
 
   async create(createProjectDto: CreateProjectDto) {
     const project = await this.projectRepository.create(createProjectDto);
-    // const user = await this.usersService.getOne();
+    const user = await this.usersService.getUserByEmail(createProjectDto.email);
+    await project.$set('users', [user.id]);
     return project;
   }
 
