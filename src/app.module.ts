@@ -3,6 +3,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { ConfigModule } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
 import { User } from './users/users.model';
+import { ProjectsModule } from './projects/projects.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { User } from './users/users.model';
       autoLoadModels: true,
     }),
     UsersModule,
+    ProjectsModule,
   ],
   controllers: [],
   providers: [],
