@@ -1,4 +1,13 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsToMany,
+  Column,
+  DataType,
+  Model,
+  Table,
+} from 'sequelize-typescript';
+import { ApiProperty } from '@nestjs/swagger';
+import { User } from '../users/users.model';
+import { UsersProjects } from './user-projects.model';
 
 interface ProjectsCreationAttrs {
   name: string;
@@ -6,7 +15,8 @@ interface ProjectsCreationAttrs {
 }
 
 @Table({ tableName: 'projects' })
-export class Projects extends Model<Projects, ProjectsCreationAttrs> {
+export class Project extends Model<Project, ProjectsCreationAttrs> {
+  @ApiProperty({ example: '1', description: 'Уникальный идентефикатор' })
   @Column({
     type: DataType.INTEGER,
     unique: true,
@@ -15,21 +25,33 @@ export class Projects extends Model<Projects, ProjectsCreationAttrs> {
   })
   id: number;
 
+  @ApiProperty({ example: 'Project Name', description: 'Название проекта' })
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
   name: string;
 
+  @ApiProperty({
+    example: 'Project Description',
+    description: 'Описание проекта',
+  })
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
   description: string;
 
+  @ApiProperty({
+    example: 'https://github.com/OstPerino/task-manager-server',
+    description: 'Ссылка на репозиторий проекта',
+  })
   @Column({
     type: DataType.STRING,
     allowNull: true,
   })
   gitRepositoryURL: string;
+
+  @BelongsToMany(() => User, () => UsersProjects)
+  users: User[];
 }
