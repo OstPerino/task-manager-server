@@ -6,12 +6,13 @@ import { Project } from './projects.model';
 import { User } from '../users/users.model';
 import { UsersProjects } from './user-projects.model';
 import { UsersModule } from '../users/users.module';
+import {Board} from "../board/board.model";
 
 @Module({
   controllers: [ProjectsController],
   providers: [ProjectsService],
   imports: [
-    SequelizeModule.forFeature([Project, User, UsersProjects]),
+    SequelizeModule.forFeature([Project, User, UsersProjects, Board]),
     UsersModule,
   ],
 })
