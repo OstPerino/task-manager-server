@@ -7,6 +7,7 @@ import { ProjectsModule } from './projects/projects.module';
 import { Project } from './projects/projects.model';
 import { UsersProjects } from './projects/user-projects.model';
 import { AuthModule } from './auth/auth.module';
+import { BoardModule } from './board/board.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { AuthModule } from './auth/auth.module';
     UsersModule,
     ProjectsModule,
     AuthModule,
+    BoardModule,
   ],
   controllers: [],
   providers: [],
