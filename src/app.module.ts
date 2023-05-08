@@ -1,14 +1,16 @@
-import { Module } from '@nestjs/common';
-import { SequelizeModule } from '@nestjs/sequelize';
-import { ConfigModule } from '@nestjs/config';
-import { UsersModule } from './users/users.module';
-import { User } from './users/users.model';
-import { ProjectsModule } from './projects/projects.module';
-import { Project } from './projects/projects.model';
-import { UsersProjects } from './projects/user-projects.model';
-import { AuthModule } from './auth/auth.module';
-import { BoardModule } from './board/board.module';
+import {Module} from '@nestjs/common';
+import {SequelizeModule} from '@nestjs/sequelize';
+import {ConfigModule} from '@nestjs/config';
+import {UsersModule} from './users/users.module';
+import {User} from './users/users.model';
+import {ProjectsModule} from './projects/projects.module';
+import {Project} from './projects/projects.model';
+import {UsersProjects} from './projects/user-projects.model';
+import {AuthModule} from './auth/auth.module';
+import {BoardModule} from './board/board.module';
 import {Board} from "./board/board.model";
+import {Notification} from "./notifications/notifications.model";
+import {NotificationsModule} from './notifications/notifications.module';
 
 @Module({
   imports: [
@@ -22,15 +24,17 @@ import {Board} from "./board/board.model";
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User, Project, UsersProjects, Board],
+      models: [User, Project, UsersProjects, Board, Notification],
       autoLoadModels: true,
     }),
     UsersModule,
     ProjectsModule,
     AuthModule,
     BoardModule,
+    NotificationsModule,
   ],
   controllers: [],
   providers: [],
 })
-export class AppModule {}
+export class AppModule {
+}

@@ -7,10 +7,11 @@ import { User } from '../users/users.model';
 import { UsersProjects } from './user-projects.model';
 import { UsersModule } from '../users/users.module';
 import {Board} from "../board/board.model";
+import {JwtService} from "@nestjs/jwt";
 
 @Module({
   controllers: [ProjectsController],
-  providers: [ProjectsService],
+  providers: [ProjectsService, JwtService],
   imports: [
     SequelizeModule.forFeature([Project, User, UsersProjects, Board]),
     UsersModule,
