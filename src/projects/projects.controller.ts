@@ -1,28 +1,26 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { ProjectsService } from './projects.service';
-import { ApiTags } from '@nestjs/swagger';
-import { CreateProjectDto } from './dto/create-project.dto';
+import {Body, Controller, Get, Param, Post, UseGuards, Request, Headers} from '@nestjs/common';
+import {ProjectsService} from './projects.service';
+import {ApiTags} from '@nestjs/swagger';
+import {CreateProjectDto} from './dto/create-project.dto';
+import {UsersService} from "../users/users.service";
+import {JwtService} from "@nestjs/jwt";
+// import {decodeToken} from "../utils/jwt-decode";
 
 @ApiTags('Проекты')
 @Controller('projects')
 export class ProjectsController {
-  constructor(private readonly projectsService: ProjectsService) {}
-
-  @Get()
-  getAllProjects() {
-    return this.projectsService.getAll();
+  constructor(private readonly projectsService: ProjectsService,
+              private usersService: UsersService,
+              private jwtService: JwtService) {
   }
 
-  @Get('/:id')
-  getOneProject(@Param('id') id: number) {
-    return this.projectsService.getOne(id);
+  @Get()
+  getProjectsForUser(@Headers('authorization') token) {
+    return this.projectsService.getProjectsForUser(token);
   }
 
   @Post()
   createNewProject(@Body() createProjectDto: CreateProjectDto) {
     return this.projectsService.create(createProjectDto);
   }
-  //   TODO: Сделать добавление новых пользователей на проект
-  //   TODO: Сделать удаление пользователей с проекта
-  //   TODO: Сделать права пользователей на проекте
 }

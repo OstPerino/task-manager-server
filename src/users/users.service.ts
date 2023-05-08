@@ -1,11 +1,14 @@
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/sequelize';
-import { User } from './users.model';
-import { CreateUserDto } from './dto/create-user.dto';
+import {Injectable} from '@nestjs/common';
+import {InjectModel} from '@nestjs/sequelize';
+import {User} from './users.model';
+import {CreateUserDto} from './dto/create-user.dto';
+import {JwtService} from "@nestjs/jwt";
+import {Decoded} from "../interfaces/decoded";
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel(User) private userRepository: typeof User) {}
+  constructor(@InjectModel(User) private userRepository: typeof User, private jwtService: JwtService) {
+  }
 
   async create(createUserDto: CreateUserDto) {
     const user = await this.userRepository.create(createUserDto);
@@ -18,12 +21,17 @@ export class UsersService {
   }
 
   async getOne(id: number) {
-    const user = await this.userRepository.findOne({ where: { id } });
+    const user = await this.userRepository.findOne({where: {id}});
     return user;
   }
 
   async getUserByEmail(email: string) {
-    const user = await this.userRepository.findOne({ where: { email } });
+    const user = await this.userRepository.findOne({where: {email}});
     return user;
+  }
+
+  async decode(token: string): Promise<any> {
+    const decoded = this.jwtService.decode(token.split(" ")[1]);
+    return decoded;
   }
 }

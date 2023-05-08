@@ -3,11 +3,12 @@ import {
   Model,
   Column,
   DataType,
-  BelongsToMany,
+  BelongsToMany, HasMany,
 } from 'sequelize-typescript';
 import { ApiProperty } from '@nestjs/swagger';
 import { Project } from '../projects/projects.model';
 import { UsersProjects } from '../projects/user-projects.model';
+import { Notification } from "../notifications/notifications.model";
 
 interface UserCreationAttrs {
   email: string;
@@ -64,4 +65,7 @@ export class User extends Model<User, UserCreationAttrs> {
 
   @BelongsToMany(() => Project, () => UsersProjects)
   users: User[];
+
+  @HasMany(() => Notification)
+  notifications: Notification[];
 }
