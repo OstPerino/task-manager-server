@@ -9,6 +9,8 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Project } from '../projects/projects.model';
 import { UsersProjects } from '../projects/user-projects.model';
 import { Notification } from "../notifications/notifications.model";
+import {UsersBoards} from "../board/user-boards.model";
+import {Board} from "../board/board.model";
 
 interface UserCreationAttrs {
   email: string;
@@ -65,6 +67,9 @@ export class User extends Model<User, UserCreationAttrs> {
 
   @BelongsToMany(() => Project, () => UsersProjects)
   users: User[];
+
+  @BelongsToMany(() => Board, () => UsersBoards)
+  boards: Board[];
 
   @HasMany(() => Notification)
   notifications: Notification[];
