@@ -5,10 +5,10 @@ import {
   DataType,
   BelongsToMany, HasMany,
 } from 'sequelize-typescript';
-import { ApiProperty } from '@nestjs/swagger';
-import { Project } from '../projects/projects.model';
-import { UsersProjects } from '../projects/user-projects.model';
-import { Notification } from "../notifications/notifications.model";
+import {ApiProperty} from '@nestjs/swagger';
+import {Project} from '../projects/projects.model';
+import {UsersProjects} from '../projects/user-projects.model';
+import {Notification} from "../notifications/notifications.model";
 import {UsersBoards} from "../board/user-boards.model";
 import {Board} from "../board/board.model";
 
@@ -19,9 +19,9 @@ interface UserCreationAttrs {
   lastName: string;
 }
 
-@Table({ tableName: 'users' })
+@Table({tableName: 'users'})
 export class User extends Model<User, UserCreationAttrs> {
-  @ApiProperty({ example: '1', description: 'Уникальный идентефикатор' })
+  @ApiProperty({example: '1', description: 'Уникальный идентефикатор'})
   @Column({
     type: DataType.INTEGER,
     unique: true,
@@ -30,14 +30,14 @@ export class User extends Model<User, UserCreationAttrs> {
   })
   id: number;
 
-  @ApiProperty({ example: 'David', description: 'Имя пользователя' })
+  @ApiProperty({example: 'David', description: 'Имя пользователя'})
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
   firstName: string;
 
-  @ApiProperty({ example: 'Miller', description: 'Фамилия пользователя' })
+  @ApiProperty({example: 'Miller', description: 'Фамилия пользователя'})
   @Column({
     type: DataType.STRING,
     allowNull: false,
