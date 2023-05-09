@@ -2,6 +2,7 @@ import {BelongsTo, BelongsToMany, Column, DataType, ForeignKey, HasMany, Model, 
 import {Project} from "../projects/projects.model";
 import {User} from "../users/users.model";
 import {UsersBoards} from "./user-boards.model";
+import {Task} from "../tasks/tasks.model";
 
 interface BoardAttrs {
   projectId: number;
@@ -38,5 +39,8 @@ export class Board extends Model<Board, BoardAttrs> {
   project: Project;
 
   @BelongsToMany(() => User, () => UsersBoards)
-  users: User[]
+  users: User[];
+
+  @HasMany(() => Task)
+  tasks: Task[];
 }

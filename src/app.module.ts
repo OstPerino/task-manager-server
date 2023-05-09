@@ -12,6 +12,8 @@ import {Board} from "./board/board.model";
 import {Notification} from "./notifications/notifications.model";
 import {NotificationsModule} from './notifications/notifications.module';
 import {UsersBoards} from "./board/user-boards.model";
+import { TasksModule } from './tasks/tasks.module';
+import {Task} from "./tasks/tasks.model";
 
 @Module({
   imports: [
@@ -25,7 +27,7 @@ import {UsersBoards} from "./board/user-boards.model";
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User, Project, UsersProjects, Board, Notification, UsersBoards],
+      models: [User, Project, UsersProjects, Board, Notification, UsersBoards, Task],
       autoLoadModels: true,
     }),
     UsersModule,
@@ -33,6 +35,7 @@ import {UsersBoards} from "./board/user-boards.model";
     AuthModule,
     BoardModule,
     NotificationsModule,
+    TasksModule,
   ],
   controllers: [],
   providers: [],

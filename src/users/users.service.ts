@@ -3,7 +3,6 @@ import {InjectModel} from '@nestjs/sequelize';
 import {User} from './users.model';
 import {CreateUserDto} from './dto/create-user.dto';
 import {JwtService} from "@nestjs/jwt";
-import {Decoded} from "../interfaces/decoded";
 
 @Injectable()
 export class UsersService {

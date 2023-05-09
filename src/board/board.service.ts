@@ -14,31 +14,14 @@ export class BoardService {
   ) {
   }
 
+  // TODO: Invite user to board
+
   async createBoard(createBoardDto: CreateBoardDto) {
     const board = await this.boardRepository.create(createBoardDto);
     return board;
-    // const decoded = await this.usersService.decode(token);
-    // const user = await this.usersService.getUserByEmail(decoded.email);
-    //
-    // await this.usersBoards.create({
-    //   userId: user.id,
-    //   boardId: board.id
-    // });
-    //
-    // if (!user.id) {
-    //   throw new HttpException('Пользователь с таким email не зарегестрирован', HttpStatus.BAD_REQUEST);
-    // }
-    //
-    // await board.$set('users', [user.id]);
-    // return board;
   }
 
   async getBoardsByProject(token: string, id: number) {
-    return this.boardRepository.findAll({where:{projectId: id}})
-    // const decoded = await this.usersService.decode(token);
-    // const usersBoards = await this.usersBoards.findAll({where:{userId: decoded.id}, include: {all:true}});
-    // const usersIds = usersBoards.map(user => user.id);
-    // const users = await this.boardRepository.findAll({ where: { id: usersIds }, include: {all: true}});
-    // return users;
+    return this.boardRepository.findAll({where:{projectId: id}, include: {all:true}})
   }
 }
