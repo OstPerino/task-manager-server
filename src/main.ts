@@ -6,6 +6,11 @@ async function bootstrap() {
   const PORT = process.env.PORT || 5000;
   const app = await NestFactory.create(AppModule);
 
+  app.enableCors({
+    credentials: true,
+    origin: "*"
+  })
+
   const config = new DocumentBuilder()
     .setTitle('Task Manager API')
     .setDescription('API for task manager which made for diplom to SibFU')

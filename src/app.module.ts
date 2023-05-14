@@ -14,6 +14,7 @@ import {NotificationsModule} from './notifications/notifications.module';
 import {UsersBoards} from "./board/user-boards.model";
 import { TasksModule } from './tasks/tasks.module';
 import {Task} from "./tasks/tasks.model";
+import { ChatsModule } from './chats/chats.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import {Task} from "./tasks/tasks.model";
     BoardModule,
     NotificationsModule,
     TasksModule,
+    ChatsModule,
   ],
   controllers: [],
   providers: [],
