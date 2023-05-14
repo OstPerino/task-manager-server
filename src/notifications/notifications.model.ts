@@ -30,8 +30,12 @@ export class Notification extends Model<Notification> {
   type: string;
 
   @ForeignKey(() => User)
-  @Column({type: DataType.INTEGER, field: 'userId'})
-  userId: number;
+  @Column({type: DataType.INTEGER, field: 'userSenderId'})
+  userSenderId: number;
+
+  @ForeignKey(() => User)
+  @Column({type: DataType.INTEGER, field: 'userReceiverId'})
+  userReceiverId: number;
 
   @BelongsTo(() => User)
   user: User;
