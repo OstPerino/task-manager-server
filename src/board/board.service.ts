@@ -22,6 +22,11 @@ export class BoardService {
   }
 
   async getBoardsByProject(token: string, id: number) {
-    return this.boardRepository.findAll({where:{projectId: id}, include: {all:true}})
+    return this.boardRepository.findAll({where: {projectId: id}, include: {all: true}});
+  }
+
+  async getCurrentBoard(id: number) {
+    const board = await this.boardRepository.findOne({where: {id}});
+    return board;
   }
 }

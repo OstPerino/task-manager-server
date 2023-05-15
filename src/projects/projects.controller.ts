@@ -1,10 +1,9 @@
-import {Body, Controller, Get, Param, Post, UseGuards, Request, Headers} from '@nestjs/common';
+import {Body, Controller, Get, Post, Headers} from '@nestjs/common';
 import {ProjectsService} from './projects.service';
 import {ApiTags} from '@nestjs/swagger';
 import {CreateProjectDto} from './dto/create-project.dto';
 import {UsersService} from "../users/users.service";
 import {JwtService} from "@nestjs/jwt";
-// import {decodeToken} from "../utils/jwt-decode";
 
 @ApiTags('Проекты')
 @Controller('projects')
