@@ -33,6 +33,7 @@ export class ProjectsService {
   }
 
   async getProjectsForUser(token: string) {
+    console.log(token)
     const decoded = await this.usersService.decode(token);
     const usersProjects = await this.usersProjects.findAll({where: { userId: decoded.id }, include: {all: true}});
     const projectIds = usersProjects.map(project => project.projectId);

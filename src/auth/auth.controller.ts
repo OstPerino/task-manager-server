@@ -18,4 +18,6 @@ export class AuthController {
     registration(@Body() createUserDto: CreateUserDto) {
         return this.authService.registration(createUserDto);
     }
+
+    // TODO: Add /check-auth
 }
