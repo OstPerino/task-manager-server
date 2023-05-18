@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Post, Headers} from '@nestjs/common';
+import {Body, Controller, Get, Post, Headers, Param} from '@nestjs/common';
 import {ProjectsService} from './projects.service';
 import {ApiTags} from '@nestjs/swagger';
 import {CreateProjectDto} from './dto/create-project.dto';
@@ -21,5 +21,10 @@ export class ProjectsController {
   @Post()
   createNewProject(@Body() createProjectDto: CreateProjectDto) {
     return this.projectsService.create(createProjectDto);
+  }
+
+  @Get('current-project/:id')
+  async getCurrentBoard(@Param('id') id: string) {
+    return this.projectsService.getCurrentProject(+id);
   }
 }
