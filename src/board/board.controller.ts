@@ -11,6 +11,11 @@ export class BoardController {
     return this.boardService.getBoardsByProject(token, +id);
   }
 
+  @Get('current-board/:id')
+  async getCurrentBoard(@Param('id') id: string) {
+    return this.boardService.getCurrentBoard(+id);
+  }
+
   // , @Headers('authorization') token
   @Post()
   async createBoard(@Body() createBoardDto: CreateBoardDto) {

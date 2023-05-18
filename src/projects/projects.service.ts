@@ -34,10 +34,14 @@ export class ProjectsService {
 
   async getProjectsForUser(token: string) {
     const decoded = await this.usersService.decode(token);
-    const usersProjects = await this.usersProjects.findAll({where: { userId: decoded.id }, include: {all: true}});
+    const usersProjects = await this.usersProjects.findAll({where: {userId: decoded.id}, include: {all: true}});
     const projectIds = usersProjects.map(project => project.projectId);
-    const projects = await this.projectRepository.findAll({ where: { id: projectIds }, include: {all: true}});
+    const projects = await this.projectRepository.findAll({where: {id: projectIds}, include: {all: true}});
     return projects;
+  }
+
+  async getCurrentProject(id: number) {
+    return this.projectRepository.findOne({where: {id}});
   }
 
   // TODO: Сервис по добавлению пользователя на проект
