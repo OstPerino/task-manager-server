@@ -1,4 +1,4 @@
-import {Body, Controller, Post} from '@nestjs/common';
+import {Body, Controller, Get, Headers, Param, Post} from '@nestjs/common';
 import {AuthService} from './auth.service';
 import {CreateUserDto} from '../users/dto/create-user.dto';
 import {ApiTags} from '@nestjs/swagger';
@@ -20,4 +20,8 @@ export class AuthController {
     }
 
     // TODO: Add /check-auth
+    @Get('/check')
+    checkAuth(@Headers('authorization') token) {
+        return this.authService.checkAuth(token);
+    }
 }

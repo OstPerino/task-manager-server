@@ -82,4 +82,10 @@ export class AuthService {
       throw new HttpException('Wrong credentials provided', HttpStatus.BAD_REQUEST);
     }
   }
+
+  async checkAuth(token: string) {
+    const decoded = await this.userService.decode(token);
+    const user = this.userService.getUserByEmail(decoded.email);
+    return user;
+  }
 }
