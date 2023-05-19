@@ -1,4 +1,4 @@
-import {Body, Controller, Delete, Get, Param, Post} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Headers, Param, Post} from '@nestjs/common';
 import { ChatsService } from './chats.service';
 import {CreateChatDto} from "./dto/create-chat.dto";
 
@@ -18,6 +18,21 @@ export class ChatsController {
 
   @Get(':id')
   async getAllMessagesFromChat(@Param('id') id: string) {
-    return this.chatsService.getAllMessageFromChat(+id);
+    return this.chatsService.getAllMessagesFromChat(+id);
   }
+
+  @Get()
+  async getAllChatsForUser(@Headers('authorization') token) {
+    return this.chatsService.getAllChatsForUser(token);
+  }
+
+  @Get('current-chat/:id')
+  async getCurrentChat(@Param('id') id: string) {
+    return this.chatsService.getCurrentChat(+id);
+  }
+
+  // @Get('current-chat/:id')
+  // async getCurrentChat(@Param('id') id: string) {
+  //   return this.chatsService.getCurrentChat();
+  // }
 }

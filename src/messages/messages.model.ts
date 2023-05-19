@@ -1,5 +1,6 @@
 import {BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table} from "sequelize-typescript";
 import {Chat} from "../chats/chats.model";
+import {User} from "../users/users.model";
 
 interface MessageCreationAttrs {
 }
@@ -31,6 +32,10 @@ export class Message extends Model<Message, MessageCreationAttrs> {
     allowNull: false
   })
   time: string;
+
+  @ForeignKey(() => User)
+  @Column
+  receiverId: number;
 
   @BelongsTo(() => Chat)
   chat: Chat;
