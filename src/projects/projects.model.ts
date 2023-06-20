@@ -43,16 +43,6 @@ export class Project extends Model<Project, ProjectsCreationAttrs> {
     })
     description: string;
 
-    @ApiProperty({
-        example: 'https://github.com/OstPerino/task-manager-server',
-        description: 'Ссылка на репозиторий проекта',
-    })
-    @Column({
-        type: DataType.STRING,
-        allowNull: true,
-    })
-    gitRepositoryURL: string;
-
     @BelongsToMany(() => User, () => UsersProjects)
     users: User[];
 

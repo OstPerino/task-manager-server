@@ -4,6 +4,7 @@ import {Project} from './projects.model';
 import {CreateProjectDto} from './dto/create-project.dto';
 import {UsersService} from '../users/users.service';
 import {UsersProjects} from './user-projects.model';
+import {InviteUserDto} from "./dto/invite-user.dto";
 
 @Injectable()
 export class ProjectsService {
@@ -18,18 +19,33 @@ export class ProjectsService {
     const project = await this.projectRepository.create(createProjectDto);
     const user = await this.usersService.getUserByEmail(createProjectDto.email);
 
+    if (!user.id) {
+      throw new HttpException('Такого пользователя не существует', HttpStatus.BAD_REQUEST);
+    }
+
     await this.usersProjects.create({
       userId: user.id,
       projectId: project.id,
       role: 'owner',
     });
 
-    if (!user.id) {
-      throw new HttpException('Пользователь с таким email не зарегестрирован', HttpStatus.BAD_REQUEST);
-    }
-
     await project.$set('users', [user.id]);
     return project;
+  }
+
+  // TODO: Invite user to project
+  async inviteUser(inviteUserDto: InviteUserDto) {
+    const user = await this.usersService.getUserByEmail(inviteUserDto.email);
+    const project = await this.projectRepository.findOne({where:{id: inviteUserDto.projectId}});
+    console.log('invite');
+
+    // await this.usersProjects.create({
+    //   userId: user.id,
+    //   projectId: project.id,
+    //   role: 'invited'
+    // });
+
+    await project.$add('users', [user.id]);
   }
 
   async getProjectsForUser(token: string) {
@@ -43,19 +59,4 @@ export class ProjectsService {
   async getCurrentProject(id: number) {
     return this.projectRepository.findOne({where: {id}});
   }
-
-  // TODO: Сервис по добавлению пользователя на проект
-  // async inviteUser() {
-  //
-  // }
-
-  // async getAll() {
-  //   const projects = await this.projectRepository.findAll({include: {all: true}});
-  //   return projects;
-  // }
-  //
-  // async getOne(id: number) {
-  //   const project = await this.projectRepository.findOne({where: {id}});
-  //   return project;
-  // }
 }
