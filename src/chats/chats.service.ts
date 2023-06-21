@@ -28,9 +28,11 @@ export class ChatsService {
 
   async getAllChatsForUser(token: string) {
     const decoded = await this.usersService.decode(token);
+    // const chats = await this.chatRepository.findAll({where:{firstUserId: decoded.id}, include:{all:true}});
     const first = await this.chatRepository.findAll({where: {firstUserId: decoded.id}, include: {all: true}});
     const second = await this.chatRepository.findAll({where: {secondUserId: decoded.id}, include: {all: true}});
     return [...new Set([...first, ...second])];
+    // return chats;
   }
 
   async getCurrentChat(id: number) {

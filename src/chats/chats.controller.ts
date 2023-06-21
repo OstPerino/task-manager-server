@@ -13,6 +13,7 @@ export class ChatsController {
 
   @Post()
   async createChat(@Body() createChatDto: CreateChatDto) {
+    console.log(createChatDto);
     return this.chatsService.createChat(createChatDto);
   }
 
@@ -30,9 +31,4 @@ export class ChatsController {
   async getCurrentChat(@Param('id') id: string) {
     return this.chatsService.getCurrentChat(+id);
   }
-
-  // @Get('current-chat/:id')
-  // async getCurrentChat(@Param('id') id: string) {
-  //   return this.chatsService.getCurrentChat();
-  // }
 }

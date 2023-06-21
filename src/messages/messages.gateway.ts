@@ -22,6 +22,7 @@ export class MessagesGateway implements OnModuleInit {
   @SubscribeMessage('newMessage')
   async onNewMessage(@MessageBody() body: any) {
 
+    console.log(body);
     const result = await this.messagesService.createMessage(body);
 
     this.server.emit('onMessage', {

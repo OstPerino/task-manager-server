@@ -4,4 +4,5 @@ export class CreateBoardDto {
     readonly projectId: number;
     readonly name: string;
     readonly description: string;
+    readonly githubURL: string;
 }

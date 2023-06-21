@@ -31,6 +31,11 @@ export class Board extends Model<Board, BoardAttrs> {
   })
   description: string;
 
+  @Column({
+    type: DataType.STRING,
+  })
+  githubURL: string;
+
   @ForeignKey(() => Project)
   @Column({type: DataType.INTEGER, field: 'projectId'})
   projectId: number;
