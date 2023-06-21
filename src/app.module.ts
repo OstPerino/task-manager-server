@@ -12,9 +12,12 @@ import {Board} from "./board/board.model";
 import {Notification} from "./notifications/notifications.model";
 import {NotificationsModule} from './notifications/notifications.module';
 import {UsersBoards} from "./board/user-boards.model";
-import { TasksModule } from './tasks/tasks.module';
+import {TasksModule} from './tasks/tasks.module';
 import {Task} from "./tasks/tasks.model";
-import { ChatsModule } from './chats/chats.module';
+import {ChatsModule} from './chats/chats.module';
+import {MessagesModule} from './messages/messages.module';
+import {Chat} from "./chats/chats.model";
+import {Message} from "./messages/messages.model";
 
 @Module({
   imports: [
@@ -28,7 +31,7 @@ import { ChatsModule } from './chats/chats.module';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User, Project, UsersProjects, Board, Notification, UsersBoards, Task],
+      models: [User, Project, UsersProjects, Board, Notification, UsersBoards, Task, Chat, Message],
       autoLoadModels: true,
     }),
     UsersModule,
@@ -38,6 +41,7 @@ import { ChatsModule } from './chats/chats.module';
     NotificationsModule,
     TasksModule,
     ChatsModule,
+    MessagesModule
   ],
   controllers: [],
   providers: [],

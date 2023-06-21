@@ -37,6 +37,11 @@ export class Task extends Model<Task, TaskCreationAttrs> {
   })
   status: string;
 
+  @Column({
+    type: DataType.STRING,
+  })
+  branchName: string;
+
   @ForeignKey(() => User)
   @Column({type: DataType.INTEGER, field: 'creatorId'})
   creatorId: number;

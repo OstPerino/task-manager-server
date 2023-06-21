@@ -4,6 +4,7 @@ import {ApiTags} from '@nestjs/swagger';
 import {CreateProjectDto} from './dto/create-project.dto';
 import {UsersService} from "../users/users.service";
 import {JwtService} from "@nestjs/jwt";
+import {InviteUserDto} from "./dto/invite-user.dto";
 
 @ApiTags('Проекты')
 @Controller('projects')
@@ -21,6 +22,11 @@ export class ProjectsController {
   @Post()
   createNewProject(@Body() createProjectDto: CreateProjectDto) {
     return this.projectsService.create(createProjectDto);
+  }
+
+  @Post("/invite")
+  inviteUserToProject(@Body() inviteUserDto: InviteUserDto) {
+    return this.projectsService.inviteUser(inviteUserDto);
   }
 
   @Get('current-project/:id')
